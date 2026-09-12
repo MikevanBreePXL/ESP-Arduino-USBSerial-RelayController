@@ -2,14 +2,13 @@
 #include <ESP8266WiFi.h>
 
 #define RELAY_PIN 16
+// GPIO16, Not recommended for use; it is high/active on boot before void setup() is called, which may cause the relay to turn on unexpectedly. Consider using a different GPIO pin for the relay control.
 #define RELAY_ON HIGH
 #define RELAY_OFF LOW
-
-// put function declarations here:
-// int myFunction(int, int);
+// Definitions for improving code readability.
 
 void setup() {
-  // put your setup code here, to run once: 
+  // code here runs once: 
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, RELAY_OFF);
   WiFi.mode(WIFI_OFF); // Disable WiFi to save power
@@ -21,7 +20,7 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // code here runs repeatedly:
   if (Serial.available()) {
     String command = Serial.readStringUntil('\n');
     command.trim();
@@ -36,8 +35,3 @@ void loop() {
   }
   delay(10);
 }
-
-// put function definitions here:
-// int myFunction(int x, int y) {
-//   return x + y;
-// }
